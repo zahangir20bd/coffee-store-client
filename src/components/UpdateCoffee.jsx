@@ -1,0 +1,117 @@
+import { Form } from "react-router-dom";
+
+const UpdateCoffee = () => {
+  return (
+    <div className="mt-10">
+      <div className="hero min-h-screen bg-base-200 rounded-2xl">
+        <div className="hero-content flex-col">
+          <div className="text-center ">
+            <h1 className="text-5xl font-bold text-center">
+              Update Coffee Info
+            </h1>
+            <p className="py-6">
+              It is a long established fact that a reader will be distracted by
+              the readable content of a page when looking at its layout. The
+              point of using Lorem Ipsum is that it has a more-or-less normal
+              distribution of letters, as opposed to using Content here.
+            </p>
+          </div>
+          <Form className="card flex-shrink-0 w-full  shadow-2xl bg-base-100">
+            <div className="card-body">
+              <div className="flex justify-between gap-4 items-center">
+                <div className="form-control w-1/2 ">
+                  <label className="label">
+                    <span className="label-text font-semibold">Name</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="coffeeName"
+                    placeholder="Enter Coffee Name"
+                    className="input input-bordered"
+                  />
+                </div>
+                <div className="form-control w-1/2">
+                  <label className="label">
+                    <span className="label-text font-semibold">Chef</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="chefName"
+                    placeholder="Enter Coffee Chef"
+                    className="input input-bordered"
+                  />
+                </div>
+              </div>
+              <div className="flex justify-between gap-4 items-center">
+                <div className="form-control w-1/2 ">
+                  <label className="label">
+                    <span className="label-text font-semibold">Supplier</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="coffeeSupplier"
+                    placeholder="Enter Coffee Supplier"
+                    className="input input-bordered"
+                  />
+                </div>
+                <div className="form-control w-1/2">
+                  <label className="label">
+                    <span className="label-text font-semibold">Taste</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="coffeeTaste"
+                    placeholder="Enter Coffee Taste"
+                    className="input input-bordered"
+                  />
+                </div>
+              </div>
+              <div className="flex justify-between items-center gap-4">
+                <div className="form-control w-1/2 ">
+                  <label className="label">
+                    <span className="label-text font-semibold">Category</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="coffeeCategory"
+                    placeholder="Enter Coffee Category"
+                    className="input input-bordered"
+                  />
+                </div>
+                <div className="form-control w-1/2">
+                  <label className="label">
+                    <span className="label-text font-semibold">Details</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="coffeeDetails"
+                    placeholder="Enter Coffee Details"
+                    className="input input-bordered"
+                  />
+                </div>
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-semibold">Photo</span>
+                </label>
+                <input
+                  type="text"
+                  name="photoURL"
+                  placeholder="Enter Photo URL"
+                  className="input input-bordered"
+                />
+              </div>
+              <div className="form-control mt-6">
+                <button type="submit" className="btn btn-primary">
+                  Update
+                </button>
+              </div>
+            </div>
+          </Form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default UpdateCoffee;
