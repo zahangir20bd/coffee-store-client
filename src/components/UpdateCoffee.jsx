@@ -1,13 +1,59 @@
-import { Form } from "react-router-dom";
+import { Form, useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const UpdateCoffee = () => {
+  const coffee = useLoaderData();
+  const { _id, name, chef, supplier, taste, category, details, photo } = coffee;
+
+  const handleUpdateCoffee = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.coffeeName.value;
+    const chef = form.chefName.value;
+    const supplier = form.coffeeSupplier.value;
+    const taste = form.coffeeTaste.value;
+    const category = form.coffeeCategory.value;
+    const details = form.coffeeDetails.value;
+    const photo = form.photoURL.value;
+    const updatedCoffee = {
+      name,
+      chef,
+      supplier,
+      taste,
+      category,
+      details,
+      photo,
+    };
+
+    fetch(`http://localhost:5000/coffees/${_id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updatedCoffee),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            title: "Success!",
+            text: "Coffee Updated successfully.",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+          form.reset();
+        }
+      });
+  };
+
   return (
     <div className="mt-10">
       <div className="hero min-h-screen bg-base-200 rounded-2xl">
         <div className="hero-content flex-col">
           <div className="text-center ">
             <h1 className="text-5xl font-bold text-center">
-              Update Coffee Info
+              Update Coffee Info of {name}
             </h1>
             <p className="py-6">
               It is a long established fact that a reader will be distracted by
@@ -16,7 +62,10 @@ const UpdateCoffee = () => {
               distribution of letters, as opposed to using Content here.
             </p>
           </div>
-          <Form className="card flex-shrink-0 w-full  shadow-2xl bg-base-100">
+          <Form
+            onSubmit={handleUpdateCoffee}
+            className="card flex-shrink-0 w-full  shadow-2xl bg-base-100"
+          >
             <div className="card-body">
               <div className="flex justify-between gap-4 items-center">
                 <div className="form-control w-1/2 ">
@@ -26,7 +75,7 @@ const UpdateCoffee = () => {
                   <input
                     type="text"
                     name="coffeeName"
-                    placeholder="Enter Coffee Name"
+                    defaultValue={name}
                     className="input input-bordered"
                   />
                 </div>
@@ -37,7 +86,7 @@ const UpdateCoffee = () => {
                   <input
                     type="text"
                     name="chefName"
-                    placeholder="Enter Coffee Chef"
+                    defaultValue={chef}
                     className="input input-bordered"
                   />
                 </div>
@@ -50,7 +99,7 @@ const UpdateCoffee = () => {
                   <input
                     type="text"
                     name="coffeeSupplier"
-                    placeholder="Enter Coffee Supplier"
+                    defaultValue={supplier}
                     className="input input-bordered"
                   />
                 </div>
@@ -61,7 +110,7 @@ const UpdateCoffee = () => {
                   <input
                     type="text"
                     name="coffeeTaste"
-                    placeholder="Enter Coffee Taste"
+                    defaultValue={taste}
                     className="input input-bordered"
                   />
                 </div>
@@ -74,7 +123,7 @@ const UpdateCoffee = () => {
                   <input
                     type="text"
                     name="coffeeCategory"
-                    placeholder="Enter Coffee Category"
+                    defaultValue={category}
                     className="input input-bordered"
                   />
                 </div>
@@ -85,7 +134,7 @@ const UpdateCoffee = () => {
                   <input
                     type="text"
                     name="coffeeDetails"
-                    placeholder="Enter Coffee Details"
+                    defaultValue={details}
                     className="input input-bordered"
                   />
                 </div>
@@ -97,7 +146,7 @@ const UpdateCoffee = () => {
                 <input
                   type="text"
                   name="photoURL"
-                  placeholder="Enter Photo URL"
+                  defaultValue={photo}
                   className="input input-bordered"
                 />
               </div>

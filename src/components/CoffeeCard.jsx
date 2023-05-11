@@ -2,13 +2,14 @@
 /* eslint-disable no-unused-vars */
 
 import { FaEye, FaPen, FaRegEye } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const CoffeeCard = ({ coffee }) => {
+const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
   const { _id, name, chef, supplier, taste, category, details, photo } = coffee;
 
   const handleDelete = (_id) => {
-    console.log(_id);
+    // console.log(_id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -28,6 +29,10 @@ const CoffeeCard = ({ coffee }) => {
           .then((data) => {
             if (data.deletedCount > 0) {
               Swal.fire("Deleted!", "Your Coffee has been deleted.", "success");
+              const remaining = coffees.filter(
+                (newCoffee) => newCoffee._id !== _id
+              );
+              setCoffees(remaining);
             }
           });
       }
@@ -52,9 +57,11 @@ const CoffeeCard = ({ coffee }) => {
             <button className="btn">
               <FaEye />
             </button>
-            <button className="btn">
-              <FaPen />
-            </button>
+            <Link to={`/updateCoffee/${_id}`}>
+              <button className="btn">
+                <FaPen />
+              </button>
+            </Link>
             <button onClick={() => handleDelete(_id)} className="btn">
               X
             </button>
